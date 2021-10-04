@@ -31,12 +31,10 @@
       [
         "@babel/preset-env",
         {
-          "targets": [
+          "targets": 
             {
-              "node": "current",
-              "esmodules": true
+              "node": "current"
             }
-          ]
         }
       ]
     ],
