@@ -1,10 +1,60 @@
+class Drink{
+     constructor(container='bottle', content='beer'){
+       this.container = container;
+       this.content = content;
+     }
+
+     chooseDrink(drink){
+       this.content = drink;
+     }
+     chooseContainer(shell){
+       this.container = shell;
+     }
+     containerName(num){
+        if (num >=2){
+          return `${this.container}s`
+        }
+        else if (num ==1){
+          return `${this.container}`
+        }
+        else{
+          return `${this.container}s`
+        }
+     }
+}
+
+class Phrase{
+  static givePhrase(numOfCont, drink){
+        if (numOfCont == 0){
+          return `No more ${drink.container}s of ${drink.content} on the wall, no more ${drink.container}s of ${drink.content}.\n`+
+                  `Go to the store and buy some more, 99 ${drink.container}s of ${drink.content} on the wall.\n`
+        }
+        else if(numOfCont == 1){
+           return `${numOfCont} ${drink.container} of ${drink.content} on the wall, ${numOfCont} ${drink.container} of ${drink.content}.\n`+
+                   `Take it down and pass it around, no more ${drink.container}s of ${drink.content} on the wall.\n`
+        }
+        else if(numOfCont == 2){
+           return `${numOfCont} ${drink.container}s of ${drink.content} on the wall, ${numOfCont} ${drink.container}s of ${drink.content}.\n`+
+                   `Take one down and pass it around, ${numOfCont-1} ${drink.container} of ${drink.content} on the wall.\n`
+        }
+        else{
+          return (
+            `${numOfCont} ${drink.container}s of ${drink.content} on the wall, ${numOfCont} ${drink.container}s of ${drink.content}.\n` +
+            `Take one down and pass it around, ${numOfCont - 1} ${drink.container}s of ${drink.content} on the wall.\n`
+           );
+        } 
+  }
+}
+
+
 class BeerSong {
-  constructor() {
+  constructor(cont, drnk) {
       this.startVerse = 99;
       this.endVerse = 0;
+      this.drink = new Drink(cont,drnk);
     } 
 
-  static sing(start = 99, end =0) {
+  sing(start = 99, end =0) {
     let song = [];
     // else start & end is already set, continue song logic
     for (let i = start; i >= end; i--) {
@@ -13,27 +63,10 @@ class BeerSong {
     //console.log(song);
     return song.join('\n');
   }
-
-  static verse(verseNum) {
-    if (verseNum == 0){
-        return ('No more bottles of beer on the wall, no more bottles of beer.\n' +
-               'Go to the store and buy some more, 99 bottles of beer on the wall.\n');
-    }else if (verseNum == 1){
-        return ('1 bottle of beer on the wall, 1 bottle of beer.\n' +
-     'Take it down and pass it around, no more bottles of beer on the wall.\n');
-    }
-    else if (verseNum == 2){
-     return ('2 bottles of beer on the wall, 2 bottles of beer.\n' +
-     'Take one down and pass it around, 1 bottle of beer on the wall.\n');
-    }
-    else{
-        return (
-         verseNum + ' bottles of beer on the wall, ' + verseNum + ' bottles of beer.\n'
-         + 'Take one down and pass it around, ' + (verseNum - 1) + ' bottles of beer on the wall.\n'
-        );
-    }
+  
+  verse(verseNum) {
+    return Phrase.givePhrase(verseNum, this.drink);
   }
-
 }
 
 export default BeerSong;

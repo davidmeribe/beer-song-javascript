@@ -1,5 +1,5 @@
-import Beer from './beer-song';
-
+import BEER from './beer-song';
+const Beer = new BEER('bottle', 'beer')
 describe('Beer', () => {
   test('prints an arbitrary verse', () => {
     const expected = `8 bottles of beer on the wall, 8 bottles of beer.
@@ -23,7 +23,7 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
     expect(Beer.verse(0)).toEqual(expected);
   });
 
-  test('sings several verses', () => {
+   test('sings several verses', () => {
     const expected = `8 bottles of beer on the wall, 8 bottles of beer.
 Take one down and pass it around, 7 bottles of beer on the wall.
 
